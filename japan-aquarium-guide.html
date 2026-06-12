@@ -1,0 +1,1140 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>にっぽん水族館めぐり｜47都道府県の水族館ガイド</title>
+<meta name="description" content="北海道から沖縄まで、地方→都道府県の順にたどって全国の水族館を探せるガイド。料金のめやす・アクセス・見どころをコンパクトに紹介します。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Antique&family=Zen+Maru+Gothic:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#122f3a;
+  --tide:#136f85;
+  --tide-dark:#0c4f60;
+  --foam:#eaf4f3;
+  --goldfish:#e0552b;
+  --sand:#f7efdc;
+  --sand-line:#d9bd8c;
+  --line:#cfe2e0;
+  --card:#ffffff;
+  --muted:#5a7480;
+  --radius:18px;
+  --shadow:0 10px 30px rgba(18,47,58,.08);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:var(--foam);
+  background-image:radial-gradient(rgba(19,111,133,.05) 1.5px, transparent 1.6px);
+  background-size:26px 26px;
+  color:var(--ink);
+  font-family:'Zen Maru Gothic','Hiragino Maru Gothic ProN',system-ui,sans-serif;
+  line-height:1.8;
+  -webkit-font-smoothing:antialiased;
+}
+button{font:inherit;color:inherit}
+
+/* ---------- ヒーロー（水中） ---------- */
+.hero{
+  position:relative;
+  background:linear-gradient(180deg,#0a2833 0%,#0d3d4e 52%,#136f85 100%);
+  color:#f2fbfa;
+  overflow:hidden;
+  padding:72px 24px 120px;
+}
+.hero-inner{max-width:1040px;margin:0 auto;position:relative;z-index:3;display:flex;gap:30px;align-items:flex-start}
+.tate{
+  writing-mode:vertical-rl;
+  font-family:'Zen Antique',serif;
+  font-size:13px;letter-spacing:.4em;
+  color:#cfeef0;
+  border:1px solid rgba(207,238,240,.5);
+  border-radius:999px;
+  padding:16px 9px;
+  flex:none;
+}
+.hero-main{min-width:0}
+.site-title{
+  font-family:'Zen Antique',serif;font-weight:400;
+  font-size:clamp(34px,6vw,58px);
+  margin:0 0 12px;letter-spacing:.06em;line-height:1.25;
+  text-shadow:0 2px 18px rgba(0,0,0,.25);
+}
+.hero-lead{max-width:600px;margin:0 0 28px;color:#cfe9ea;font-size:15px}
+.searchbar{display:flex;max-width:540px;background:#fff;border-radius:999px;padding:5px;box-shadow:0 8px 24px rgba(0,0,0,.22)}
+.searchbar input{
+  flex:1;min-width:0;border:none;outline:none;background:none;
+  font:inherit;font-size:14.5px;color:var(--ink);padding:9px 16px;
+}
+.searchbar input::placeholder{color:#9ab3ba}
+.searchbar button{
+  border:none;border-radius:999px;background:var(--tide-dark);color:#fff;
+  font-weight:700;font-size:13.5px;padding:9px 22px;cursor:pointer;flex:none;
+}
+.searchbar button:hover{background:var(--goldfish)}
+.hero-stats{display:flex;gap:26px;margin-top:30px;flex-wrap:wrap}
+.hero-stats div{font-size:12px;color:#a9d4d6;letter-spacing:.1em}
+.hero-stats b{display:block;font-family:'Zen Antique',serif;font-weight:400;font-size:26px;color:#fff;letter-spacing:.04em}
+
+/* 回遊する魚のシルエット */
+.fishline{position:absolute;left:0;display:flex;gap:110px;width:max-content;z-index:1;pointer-events:none}
+.fishline svg{height:auto;fill:#bfeef0}
+.f1{top:24%;opacity:.16;animation:swim 70s linear infinite}
+.f1 svg{width:84px}
+.f2{top:64%;opacity:.10;animation:swim 110s linear infinite reverse}
+.f2 svg{width:52px;transform:scaleX(-1)}
+@keyframes swim{from{transform:translateX(100vw)}to{transform:translateX(-110%)}}
+.wave{position:absolute;left:0;bottom:-1px;width:100%;z-index:2;display:block}
+
+/* ---------- パンくず ---------- */
+#crumbs{
+  position:sticky;top:0;z-index:50;
+  background:rgba(234,244,243,.92);
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--line);
+}
+.crumbs-inner{max-width:1040px;margin:0 auto;padding:10px 24px;display:flex;align-items:center;gap:6px;font-size:13.5px;flex-wrap:wrap}
+.crumb-link{background:none;border:none;color:var(--tide);cursor:pointer;padding:4px 8px;border-radius:8px;font-weight:500}
+.crumb-link:hover{background:#fff}
+.crumb-now{font-weight:700;padding:4px 4px}
+.crumb-sep{color:var(--muted)}
+
+/* ---------- 本文共通 ---------- */
+main{max-width:1040px;margin:0 auto;padding:44px 24px 90px}
+.view{animation:rise .35s ease both}
+@keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.section-label{font-family:'Zen Antique',serif;font-weight:400;font-size:clamp(22px,3.4vw,30px);margin:0 0 6px;letter-spacing:.04em}
+.section-sub{color:var(--muted);font-size:14px;margin:0 0 28px}
+.back-row{margin-top:36px;display:flex;gap:12px;flex-wrap:wrap}
+.btn-back{
+  background:#fff;border:1px solid var(--line);border-radius:999px;
+  padding:9px 22px;cursor:pointer;color:var(--tide-dark);font-weight:700;font-size:13.5px;
+  box-shadow:var(--shadow);
+}
+.btn-back:hover{border-color:var(--tide);color:var(--tide)}
+
+/* ---------- 地方カード ---------- */
+.grid-regions{display:grid;grid-template-columns:repeat(auto-fill,minmax(228px,1fr));gap:16px;list-style:none;padding:0;margin:0}
+.region-card{
+  width:100%;text-align:left;cursor:pointer;
+  background:var(--card);
+  border:1px solid var(--line);
+  border-top:6px solid var(--rc,#136f85);
+  border-radius:var(--radius);
+  padding:20px 20px 16px;
+  box-shadow:var(--shadow);
+  transition:transform .18s ease, box-shadow .18s ease;
+}
+.region-card:hover{transform:translateY(-4px);box-shadow:0 16px 36px rgba(18,47,58,.14)}
+.region-name{font-family:'Zen Antique',serif;font-size:21px;letter-spacing:.04em}
+.region-meta{font-size:12.5px;color:var(--muted);margin-top:8px;display:flex;gap:14px}
+.region-meta b{color:var(--rc,#136f85);font-size:15px}
+
+/* ---------- 都道府県ボタン ---------- */
+.grid-prefs{display:grid;grid-template-columns:repeat(auto-fill,minmax(156px,1fr));gap:12px;list-style:none;padding:0;margin:0}
+.pref-btn{
+  width:100%;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:8px;
+  background:var(--card);border:1px solid var(--line);border-left:5px solid var(--rc,#136f85);
+  border-radius:14px;padding:13px 14px;font-weight:700;font-size:15px;
+  box-shadow:var(--shadow);transition:transform .15s ease;
+}
+.pref-btn:hover{transform:translateY(-3px)}
+.pref-count{
+  flex:none;font-size:11.5px;font-weight:700;color:var(--tide-dark);
+  background:#e3f1f0;border-radius:999px;padding:2px 9px;
+}
+
+/* ---------- 水族館カード（入館券スタイル） ---------- */
+.pref-note{
+  background:#fff;border-left:5px solid var(--tide);
+  padding:12px 18px;border-radius:0 12px 12px 0;
+  font-size:13.5px;color:#3c5a64;margin:0 0 24px;box-shadow:var(--shadow);
+}
+.aq-list{display:flex;flex-direction:column;gap:24px;list-style:none;padding:0;margin:0}
+.aq-card{
+  display:grid;grid-template-columns:1fr 234px;
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);position:relative;
+}
+.aq-main{padding:24px 26px;min-width:0}
+.aq-head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.aq-name{font-family:'Zen Antique',serif;font-weight:400;font-size:22px;margin:0;letter-spacing:.03em}
+.aq-city{font-size:12.5px;color:var(--muted)}
+.aq-tags{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0 12px;padding:0;list-style:none}
+.tag{font-size:11.5px;background:#e3f1f0;color:var(--tide-dark);border-radius:999px;padding:3px 11px;font-weight:500}
+.aq-desc{margin:0 0 12px;font-size:14.5px}
+.aq-alert{font-size:12.5px;color:#9a4a1f;background:#fdf0e7;border-radius:10px;padding:8px 13px;margin:0 0 12px}
+.aq-rows{display:grid;gap:9px;font-size:13.5px}
+.aq-row{display:grid;grid-template-columns:88px 1fr;gap:12px;align-items:start}
+.aq-k{
+  font-weight:700;color:var(--tide-dark);font-size:11.5px;letter-spacing:.18em;
+  background:#eef6f5;border-radius:8px;text-align:center;padding:4px 0;margin-top:2px;
+}
+.points{margin:0;padding-left:18px}
+.points li::marker{color:var(--goldfish)}
+.aq-link{
+  display:inline-block;margin-top:14px;font-size:13px;color:var(--tide);font-weight:700;
+  text-decoration:none;border-bottom:1.5px dashed currentColor;padding-bottom:1px;
+}
+.aq-link:hover{color:var(--goldfish)}
+
+/* 半券（料金スタブ） */
+.aq-stub{
+  background:var(--sand);
+  border-left:2px dashed var(--sand-line);
+  border-radius:0 var(--radius) var(--radius) 0;
+  padding:22px 18px;display:flex;flex-direction:column;gap:7px;position:relative;
+}
+.aq-stub::before,.aq-stub::after{
+  content:"";position:absolute;left:-11px;width:20px;height:20px;border-radius:50%;
+  background:var(--foam);border:1px solid var(--line);
+}
+.aq-stub::before{top:-11px}
+.aq-stub::after{bottom:-11px}
+.stub-label{font-size:10.5px;letter-spacing:.3em;color:#8a6b34;font-weight:700}
+.stub-price{font-family:'Zen Antique',serif;font-size:16.5px;color:#4c3a14;line-height:1.7}
+.stub-note{font-size:11.5px;color:#8a7a52;margin-top:auto}
+
+/* ---------- 検索結果・空表示 ---------- */
+.result-pref{font-size:12px;font-weight:700;color:#fff;background:var(--tide);border-radius:999px;padding:2px 11px}
+.empty{padding:46px 24px;text-align:center;color:var(--muted);background:#fff;border-radius:var(--radius);border:1.5px dashed var(--line)}
+
+/* ---------- フッター ---------- */
+footer{background:var(--ink);color:#bcd6d8;padding:42px 24px 50px;font-size:12.5px;margin-top:20px}
+.foot-inner{max-width:1040px;margin:0 auto;display:grid;gap:10px}
+.foot-title{font-family:'Zen Antique',serif;color:#fff;font-size:17px;letter-spacing:.06em}
+
+/* ---------- フォーカスとモーション ---------- */
+.region-card:focus-visible,.pref-btn:focus-visible,.btn-back:focus-visible,
+.crumb-link:focus-visible,.searchbar button:focus-visible,.aq-link:focus-visible{
+  outline:3px solid var(--goldfish);outline-offset:2px;border-radius:12px;
+}
+.searchbar:focus-within{box-shadow:0 0 0 3px rgba(224,85,43,.45)}
+@media (prefers-reduced-motion:reduce){
+  .f1,.f2{animation:none}
+  .view{animation:none}
+  html{scroll-behavior:auto}
+  .region-card,.pref-btn{transition:none}
+}
+
+/* ---------- レスポンシブ ---------- */
+@media (max-width:680px){
+  .hero{padding:52px 18px 100px}
+  .hero-inner{flex-direction:column;gap:18px}
+  .tate{writing-mode:horizontal-tb;padding:6px 16px;letter-spacing:.32em;align-self:flex-start}
+  .aq-card{grid-template-columns:1fr}
+  .aq-stub{
+    border-left:none;border-top:2px dashed var(--sand-line);
+    border-radius:0 0 var(--radius) var(--radius);
+  }
+  .aq-stub::before{top:-11px;left:-11px}
+  .aq-stub::after{top:-11px;bottom:auto;left:auto;right:-11px}
+  .aq-row{grid-template-columns:78px 1fr;gap:9px}
+  main{padding:34px 18px 70px}
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="fishline f1" aria-hidden="true">
+    <svg viewBox="0 0 120 48"><ellipse cx="48" cy="24" rx="44" ry="18"/><path d="M88 24 L118 8 L112 24 L118 40 Z"/></svg>
+    <svg viewBox="0 0 120 48"><ellipse cx="48" cy="24" rx="44" ry="18"/><path d="M88 24 L118 8 L112 24 L118 40 Z"/></svg>
+    <svg viewBox="0 0 120 48"><ellipse cx="48" cy="24" rx="44" ry="18"/><path d="M88 24 L118 8 L112 24 L118 40 Z"/></svg>
+  </div>
+  <div class="fishline f2" aria-hidden="true">
+    <svg viewBox="0 0 120 48"><ellipse cx="48" cy="24" rx="44" ry="18"/><path d="M88 24 L118 8 L112 24 L118 40 Z"/></svg>
+    <svg viewBox="0 0 120 48"><ellipse cx="48" cy="24" rx="44" ry="18"/><path d="M88 24 L118 8 L112 24 L118 40 Z"/></svg>
+    <svg viewBox="0 0 120 48"><ellipse cx="48" cy="24" rx="44" ry="18"/><path d="M88 24 L118 8 L112 24 L118 40 Z"/></svg>
+    <svg viewBox="0 0 120 48"><ellipse cx="48" cy="24" rx="44" ry="18"/><path d="M88 24 L118 8 L112 24 L118 40 Z"/></svg>
+  </div>
+  <div class="hero-inner">
+    <p class="tate">全国四十七都道府県</p>
+    <div class="hero-main">
+      <h1 class="site-title">にっぽん水族館めぐり</h1>
+      <p class="hero-lead">地方を選んで、都道府県を選んで、いちばん近い「青の世界」へ。入館料のめやす・アクセス・見どころを一枚の入館券のようにまとめました。</p>
+      <div class="searchbar" role="search">
+        <input id="searchInput" type="search" placeholder="水族館名・県名・キーワードで検索（例：ジンベエザメ）" aria-label="水族館を検索">
+        <button id="searchBtn" type="button">さがす</button>
+      </div>
+      <div class="hero-stats">
+        <div><b>8</b>地方</div>
+        <div><b>47</b>都道府県</div>
+        <div><b id="statSpots">--</b>掲載施設</div>
+      </div>
+    </div>
+  </div>
+  <svg class="wave" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true">
+    <path fill="#eaf4f3" d="M0,40 C180,70 360,8 560,22 C760,36 900,70 1100,52 C1260,38 1360,16 1440,30 L1440,70 L0,70 Z"/>
+  </svg>
+</header>
+
+<nav id="crumbs" aria-label="現在地"><div class="crumbs-inner" id="crumbsInner"></div></nav>
+
+<main id="app" aria-live="polite"></main>
+
+<footer>
+  <div class="foot-inner">
+    <p class="foot-title">にっぽん水族館めぐり</p>
+    <p>掲載している入館料・アクセス・展示内容は2026年6月時点のめやすです。料金の改定、変動料金制、臨時休館やリニューアルなどがありますので、お出かけ前に必ず各施設の公式サイトで最新情報をご確認ください。</p>
+    <p>このページはHTMLファイル1枚で動作します。施設を追加したいときは、ページ内のスクリプトにある DATA に同じ形式で書き足すだけで反映されます。</p>
+  </div>
+</footer>
+
+<script>
+"use strict";
+/* =========================================================
+   DATA：地方 → 都道府県 → 水族館
+   1施設 = { name, city, desc, price, note, access, points, tags, url }
+   url が無い施設は「公式サイトを検索」リンクを自動生成します。
+   ========================================================= */
+const DATA = [
+{ id:"hokkaido", region:"北海道地方", color:"#2c7fb8", prefs:[
+  { id:"hokkaido", name:"北海道", note:"", spots:[
+    { name:"おたる水族館", city:"小樽市",
+      desc:"石狩湾を見下ろす高台に建つ、北の海の生きものが主役の水族館。冬は雪の中をペンギンがよちよち歩く「雪中さんぽ」が名物で、季節ごとに表情が変わります。",
+      price:"大人 1,800円 ／ 小・中学生 700円",
+      note:"冬期営業は割引料金あり",
+      access:"JR小樽駅からバス約25分「おたる水族館」下車すぐ",
+      points:["自然の海をそのまま仕切った豪快な海獣公園","トドの大ジャンプなど迫力のショー","冬限定・ペンギンの雪中さんぽ"],
+      tags:["海獣ショー","北の海"],
+      url:"https://otaru-aq.jp/" },
+    { name:"AOAO SAPPORO", city:"札幌市",
+      desc:"2023年に札幌の中心部・狸小路のビル内に開業した都市型水族館。水草が茂る巨大なネイチャーアクアリウムや照明演出が美しく、夜まで楽しめる大人向けの雰囲気です。",
+      price:"大人 2,200円前後 ／ 小・中学生 1,100円前後",
+      note:"日時により変動する料金制",
+      access:"地下鉄大通駅・すすきの駅から徒歩約3〜5分（moyuk SAPPORO 4〜6階）",
+      points:["国内最大級の水草レイアウト水槽","キタイワトビペンギンの飼育展示","ナイトタイムの光の演出"],
+      tags:["都市型","夜も営業"],
+      url:"https://aoao-sapporo.blue/" },
+    { name:"北の大地の水族館（山の水族館）", city:"北見市",
+      desc:"温根湯温泉の道の駅に隣接する小さな淡水魚水族館。滝つぼを下からのぞく水槽や、冬に水面が凍る世界初の川の水槽など、アイデアあふれる展示で全国に知られます。",
+      price:"大人 670円 ／ 小学生 300円",
+      note:"",
+      access:"JR留辺蘂駅からバス約20分「道の駅おんねゆ温泉」下車",
+      points:["滝つぼを見上げる迫力の水槽","冬に凍る川を再現した世界初の展示","幻の魚イトウの大群"],
+      tags:["淡水魚","個性派"],
+      url:"https://onneyu-aq.com/" }
+  ]}
+]},
+{ id:"tohoku", region:"東北地方", color:"#1f8a8c", prefs:[
+  { id:"aomori", name:"青森県", note:"", spots:[
+    { name:"青森県営浅虫水族館", city:"青森市",
+      desc:"本州最北端の水族館。陸奥湾のホタテ養殖を再現したトンネル水槽など、青森の海と暮らしを丁寧に伝える展示が魅力で、イルカパフォーマンスも通年開催されます。",
+      price:"大人 1,030円 ／ 小・中学生 510円",
+      note:"",
+      access:"青い森鉄道・浅虫温泉駅から徒歩約10分",
+      points:["陸奥湾の養殖いかだをくぐるトンネル水槽","本州最北のイルカパフォーマンス","浅虫温泉とあわせて楽しめる立地"],
+      tags:["温泉街","イルカ"],
+      url:"https://asamushi-aqua.com/" }
+  ]},
+  { id:"iwate", name:"岩手県", note:"", spots:[
+    { name:"もぐらんぴあ（久慈地下水族科学館）", city:"久慈市",
+      desc:"国家石油備蓄基地の作業用トンネルを利用した、全国でも珍しい「地下の水族館」。東日本大震災で全壊後に再建され、震災を生き延びたアオウミガメのかめ吉が暮らしています。",
+      price:"大人 700円 ／ 小・中学生 300円",
+      note:"",
+      access:"三陸鉄道・久慈駅から車で約5分",
+      points:["トンネル内に広がる地下水族館という立地","震災を乗り越えたかめ吉と再建の物語","久慈の海と潜水文化「南部もぐり」の展示"],
+      tags:["地下水族館","三陸"] }
+  ]},
+  { id:"miyagi", name:"宮城県", note:"", spots:[
+    { name:"仙台うみの杜水族館", city:"仙台市",
+      desc:"三陸の豊かな海を再現した大水槽「いのちきらめく うみ」が圧巻。屋根のない大水槽に降りそそぐ光とイワシの群泳が美しく、東北最大級のイルカ・アシカショーも人気です。",
+      price:"大人 2,400円 ／ 小学生 1,200円",
+      note:"",
+      access:"JR仙石線・中野栄駅から徒歩約15分（無料シャトルあり）",
+      points:["三陸の海を再現した巨大水槽","東北最大級のイルカ・アシカパフォーマンス","養殖や漁業など海と人の関わりの展示"],
+      tags:["大水槽","ショー充実"],
+      url:"https://www.uminomori.jp/umino/" }
+  ]},
+  { id:"akita", name:"秋田県", note:"", spots:[
+    { name:"男鹿水族館GAO", city:"男鹿市",
+      desc:"日本海に面した断崖に建ち、館内からの眺望も自慢。約40種2,000匹が泳ぐ男鹿の海大水槽と、秋田県で唯一会えるホッキョクグマが看板です。",
+      price:"大人 1,500円 ／ 小・中学生 600円",
+      note:"",
+      access:"JR男鹿駅から車・バスで約30分",
+      points:["ホッキョクグマの豪快な食事タイム","男鹿の海を再現した大水槽","県魚ハタハタの本格展示"],
+      tags:["ホッキョクグマ","絶景"],
+      url:"https://www.gao-aqua.jp/" }
+  ]},
+  { id:"yamagata", name:"山形県", note:"", spots:[
+    { name:"鶴岡市立加茂水族館", city:"鶴岡市",
+      desc:"展示するクラゲの種類数で世界一に認定された「クラゲの聖地」。直径5mの円形大水槽クラゲドリームシアターを無数のミズクラゲが漂う光景は、一度見たら忘れられません。",
+      price:"大人 1,000円 ／ 小・中学生 500円",
+      note:"2026年春に展示を改装",
+      access:"JR鶴岡駅からバス約40分「加茂水族館」下車",
+      points:["世界一のクラゲ展示種類数","幻想的なクラゲドリームシアター","クラゲ入りラーメンなど名物グルメ"],
+      tags:["クラゲ世界一","日本海"],
+      url:"https://kamo-kurage.jp/" }
+  ]},
+  { id:"fukushima", name:"福島県", note:"", spots:[
+    { name:"アクアマリンふくしま", city:"いわき市",
+      desc:"黒潮と親潮がぶつかる「潮目の海」がテーマの体験型水族館。三角形のトンネル水槽や、釣った魚をその場で食べられる体験など、海と命を学ぶ仕掛けにあふれています。",
+      price:"大人 1,850円 ／ 小学生〜高校生 900円",
+      note:"",
+      access:"JR泉駅からバス約20分（小名浜港エリア）",
+      points:["潮目を表現した三角トンネル水槽","生きた化石シーラカンスの調査研究展示","釣り体験「釣って学んで食べる」"],
+      tags:["体験型","潮目の海"],
+      url:"https://www.aquamarine.or.jp/" }
+  ]}
+]},
+{ id:"kanto", region:"関東地方", color:"#5a67c0", prefs:[
+  { id:"ibaraki", name:"茨城県", note:"", spots:[
+    { name:"アクアワールド茨城県大洗水族館", city:"大洗町",
+      desc:"サメの飼育種類数日本一を誇る、太平洋に面した大型水族館。日本最大級のマンボウ専用水槽や、大水槽を背にした本格的なイルカ・アシカショーも見応え十分です。",
+      price:"大人 2,300円 ／ 小・中学生 1,100円",
+      note:"",
+      access:"鹿島臨海鉄道・大洗駅から循環バス約15分",
+      points:["60種を超えるサメの展示は日本一","のんびり泳ぐマンボウの大水槽","出会いの海の大水槽とイワシの群泳"],
+      tags:["サメ日本一","大型館"],
+      url:"https://www.aquaworld-oarai.com/" }
+  ]},
+  { id:"tochigi", name:"栃木県", note:"海のない栃木県では、川の生きものに特化したユニークな水族館が活躍しています。", spots:[
+    { name:"栃木県なかがわ水遊園", city:"大田原市",
+      desc:"清流・那珂川のほとりに建つ県内唯一の水族館。源流から河口まで那珂川の魚をたどる展示と、ピラルクーが泳ぐアマゾン大水槽のトンネルが名物です。",
+      price:"大人 660円 ／ 小・中学生 250円",
+      note:"",
+      access:"JR西那須野駅から車で約20分（東北道・矢板ICから約25分）",
+      points:["那珂川の魚を源流から河口までたどる展示","巨大魚ピラルクーのアマゾントンネル水槽","釣り堀や農産物直売所も併設"],
+      tags:["淡水魚","川の博物館"],
+      url:"https://tnap.jp/" }
+  ]},
+  { id:"gunma", name:"群馬県", note:"群馬県も海のない県。利根川の源流域で、川の生きものとふれあえます。", spots:[
+    { name:"道の駅みなかみ水紀行館 水産学習館", city:"みなかみ町",
+      desc:"利根川上流の谷川岳のふもとにある、淡水魚専門の小さな学習館。トンネル型の水槽から見上げる清流の魚たちと、道の駅ならではの気軽さが魅力です。",
+      price:"大人 300円 ／ 小・中学生 200円",
+      note:"",
+      access:"JR水上駅から徒歩約10分",
+      points:["利根川の上流に暮らす魚のトンネル水槽","特別天然記念物オオサンショウウオ","温泉街さんぽとセットで楽しめる"],
+      tags:["淡水魚","道の駅"] }
+  ]},
+  { id:"saitama", name:"埼玉県", note:"", spots:[
+    { name:"さいたま水族館", city:"羽生市",
+      desc:"荒川に暮らす魚たちを上流から下流の順にたどれる、淡水魚専門の水族館。国の天然記念物ミヤコタナゴをはじめ、身近な川の生きものをじっくり観察できます。",
+      price:"大人 400円 ／ 小・中学生 100円",
+      note:"特別展開催時は別料金",
+      access:"東武伊勢崎線・羽生駅から車で約10分（東北道・羽生ICから約15分）",
+      points:["荒川の魚約70種を再現した展示","天然記念物ミヤコタナゴの保護増殖","庭池の大きなコイへのえさやり"],
+      tags:["淡水魚","低料金"] }
+  ]},
+  { id:"chiba", name:"千葉県", note:"", spots:[
+    { name:"鴨川シーワールド", city:"鴨川市",
+      desc:"国内屈指のシャチのパフォーマンスで知られる海のテーマパーク。シャチ・イルカ・ベルーガ・アシカの4つのショーをはしごでき、太平洋を望むロケーションも爽快です。",
+      price:"大人 3,300円 ／ 小・中学生 2,000円",
+      note:"",
+      access:"JR安房鴨川駅から無料送迎バス約10分",
+      points:["水しぶき豪快なシャチパフォーマンス","ベルーガの不思議な鳴き声の実演","海を望むレストランと宿泊施設"],
+      tags:["シャチ","テーマパーク"],
+      url:"https://www.kamogawa-seaworld.jp/" }
+  ]},
+  { id:"tokyo", name:"東京都", note:"", spots:[
+    { name:"サンシャイン水族館", city:"豊島区",
+      desc:"池袋のビル屋上という立地を生かした「天空のオアシス」。頭上の水槽をペンギンが飛ぶように泳ぐ天空のペンギンなど、都会の空と水の組み合わせが新鮮です。",
+      price:"大人 2,600円〜 ／ 小・中学生 1,300円〜",
+      note:"日付指定の変動料金制",
+      access:"東京メトロ・東池袋駅から徒歩約5分、池袋駅から徒歩約10分",
+      points:["ビルの空を泳ぐ天空のペンギン","屋外エリアのアシカやカワウソ","大水槽サンシャインラグーンの解説ショー"],
+      tags:["都市型","屋上"],
+      url:"https://sunshinecity.jp/aquarium/" },
+    { name:"すみだ水族館", city:"墨田区",
+      desc:"東京スカイツリーのたもとにある、ゆったり過ごせる屋内水族館。仕切りのない国内最大級のペンギンプールを間近に眺められ、クラゲの大水槽ビッグシャーレも人気です。",
+      price:"大人 2,500円 ／ 小学生 1,200円",
+      note:"",
+      access:"とうきょうスカイツリー駅・押上駅からすぐ",
+      points:["屋内開放型のペンギンプール","上からのぞくクラゲ水槽ビッグシャーレ","小笠原の海を再現した大水槽"],
+      tags:["スカイツリー","ペンギン"],
+      url:"https://www.sumida-aquarium.com/" },
+    { name:"葛西臨海水族園", city:"江戸川区",
+      desc:"ガラスドームが目印の都立水族園。ドーナツ型の大水槽を群れで回遊するクロマグロは国内随一の迫力で、世界中の海の生きものを手頃な料金で楽しめます。",
+      price:"一般 700円 ／ 中学生 250円（小学生以下無料）",
+      note:"リニューアル計画が進行中",
+      access:"JR京葉線・葛西臨海公園駅から徒歩約5分",
+      points:["クロマグロの群泳が見られる大水槽","世界の海を地域ごとにめぐる展示","海辺の公園と観覧車もセットで"],
+      tags:["マグロ","コスパ"],
+      url:"https://www.tokyo-zoo.net/zoo/kasai/" }
+  ]},
+  { id:"kanagawa", name:"神奈川県", note:"", spots:[
+    { name:"新江ノ島水族館", city:"藤沢市",
+      desc:"湘南の海辺に建ち、富士山と江の島を望むロケーションが自慢。約8,000匹のマイワシが渦を巻く相模湾大水槽と、長年の研究に裏打ちされたクラゲ展示で知られます。",
+      price:"大人 2,800円 ／ 小学生 1,400円",
+      note:"",
+      access:"小田急・片瀬江ノ島駅から徒歩約3分",
+      points:["マイワシの大群が舞う相模湾大水槽","幻想的なクラゲファンタジーホール","江の島と富士山を背景にしたイルカショー"],
+      tags:["湘南","クラゲ"],
+      url:"https://www.enosui.com/" },
+    { name:"横浜・八景島シーパラダイス", city:"横浜市",
+      desc:"水族館・遊園地・ショッピングが集まる島まるごとのレジャー施設。性格の異なる4つの水族館で構成され、5万尾のイワシが光と音にあわせて舞う演出は圧巻です。",
+      price:"水族館4施設パス 大人 3,300円 ／ 小・中学生 1,900円",
+      note:"乗り物込みのワンデーパスは別料金",
+      access:"金沢シーサイドライン・八景島駅からすぐ",
+      points:["テーマの異なる4つの水族館めぐり","イワシイリュージョンの大群泳","海の上のジェットコースターなど遊園地"],
+      tags:["島まるごと","遊園地併設"],
+      url:"https://www.seaparadise.co.jp/" },
+    { name:"カワスイ 川崎水族館", city:"川崎市",
+      desc:"川崎駅前のビルに広がる、世界の川がテーマの水族館。多摩川からアマゾンまでをめぐる構成で、カピバラやナマケモノにも会える夜の照明演出が美しい都市型施設です。",
+      price:"大人 2,000円 ／ 小学生 800円",
+      note:"",
+      access:"JR川崎駅から徒歩約1分（川崎ルフロン9・10階）",
+      points:["駅徒歩1分で世界の川を旅する展示","アマゾンゾーンの動物たち","昼と夜で変わる光の演出"],
+      tags:["駅前","淡水魚"],
+      url:"https://kawa-sui.com/" }
+  ]}
+]},
+{ id:"chubu", region:"中部地方", color:"#3e9b57", prefs:[
+  { id:"niigata", name:"新潟県", note:"", spots:[
+    { name:"新潟市水族館 マリンピア日本海", city:"新潟市",
+      desc:"日本海側有数の規模を誇る総合水族館。日本海の魚が頭上を泳ぐトンネル水槽や、信濃川の魚、ペンギン海岸まで、新潟の水辺をまるごと体験できます。",
+      price:"大人 1,500円 ／ 小・中学生 600円",
+      note:"",
+      access:"JR新潟駅からバス約25分「水族館前」下車",
+      points:["日本海大水槽のマリントンネル","イルカショーと解説プログラム","信濃川など新潟の淡水魚展示"],
+      tags:["日本海","総合水族館"],
+      url:"https://www.marinepia.or.jp/" },
+    { name:"上越市立水族博物館 うみがたり", city:"上越市",
+      desc:"水槽の水面が日本海とひとつにつながって見える設計が話題の水族館。マゼランペンギンの飼育数は日本一で、シロイルカのパフォーマンスも間近で楽しめます。",
+      price:"大人 1,800円 ／ 小・中学生 900円",
+      note:"",
+      access:"えちごトキめき鉄道・直江津駅から徒歩約15分",
+      points:["日本海と一体化して見える大水槽","マゼランペンギン飼育数日本一","シロイルカとの距離が近い展示"],
+      tags:["絶景水槽","ペンギン"],
+      url:"https://www.umigatari.org/" }
+  ]},
+  { id:"toyama", name:"富山県", note:"", spots:[
+    { name:"魚津水族館", city:"魚津市",
+      desc:"1913年創立、現存する中で日本最古級の歴史を持つ水族館。水深1,000mの駿河湾ならぬ富山湾の生きものに強く、春には光るホタルイカの発光実演も行われます。",
+      price:"大人 1,000円 ／ 小・中学生 500円",
+      note:"",
+      access:"あいの風とやま鉄道・魚津駅から車で約10分",
+      points:["100年を超える歴史ある水族館","富山湾の深海と春のホタルイカ","日本初の技術を伝えるトンネル水槽"],
+      tags:["日本最古級","富山湾"] }
+  ]},
+  { id:"ishikawa", name:"石川県", note:"", spots:[
+    { name:"のとじま水族館", city:"七尾市",
+      desc:"能登島にある県内唯一の大型水族館。2024年の能登半島地震で大きな被害を受けながら同年7月に営業を再開し、プロジェクションマッピングの回廊やイルカショーが復活しています。",
+      price:"大人 1,890円 ／ 中学生以下 510円",
+      note:"震災後の復旧状況により展示が変わる場合あり",
+      access:"JR和倉温泉駅から車・バスで約20〜30分",
+      points:["日本海側最大級の大水槽ジンベエザメ館 青の世界（現在ジンベエザメは展示休止中）","魚の群れと映像が融合するのと海遊回廊","震災からの復興の歩みを伝える展示"],
+      tags:["能登","復興"],
+      url:"https://www.notoaqua.jp/" }
+  ]},
+  { id:"fukui", name:"福井県", note:"", spots:[
+    { name:"越前松島水族館", city:"坂井市",
+      desc:"東尋坊にほど近い海辺の体験型水族館。水面がガラス張りになった「さんごの海」水槽の上を歩けるほか、磯の生きものに直接さわれるコーナーが充実しています。",
+      price:"大人 2,200円 ／ 小・中学生 1,200円",
+      note:"",
+      access:"JR芦原温泉駅からバス約40分",
+      points:["水槽の上を歩けるガラス床の海床透視","ペンギンのお散歩タイム","磯の生きものタッチ体験が豊富"],
+      tags:["体験型","東尋坊近く"],
+      url:"https://www.echizen-aquarium.com/" },
+    { name:"おばま水族館", city:"小浜市",
+      desc:"2026年5月、小浜の古い町並みに開業したばかりの町家水族館。福井県立大学の学生たちが運営し、若狭湾の魚と養殖研究の成果を間近で紹介する新しい形の小さな水族館です。",
+      price:"低料金の小規模館（最新の料金は公式情報で確認）",
+      note:"2026年5月開業の新施設",
+      access:"JR小浜駅から徒歩圏（三丁町の古民家を再生）",
+      points:["古民家を再生した町家水族館","大学生が運営する研究発信型の展示","若狭の町並み散策とあわせて"],
+      tags:["2026年開業","学生運営"] }
+  ]},
+  { id:"yamanashi", name:"山梨県", note:"海のない山梨県では、富士山の湧き水が育む透明な水の世界に出会えます。", spots:[
+    { name:"森の中の水族館。（山梨県立富士湧水の里水族館）", city:"忍野村",
+      desc:"富士山の湧水を引き込んだ、淡水魚専門では国内有数の水族館。二重構造の回遊水槽では大型魚と小魚が一緒に泳いでいるように見え、水の透明度の高さに驚かされます。",
+      price:"大人 420円 ／ 小・中学生 200円",
+      note:"",
+      access:"富士急行・富士山駅からバス約20分「さかな公園」下車",
+      points:["驚くほど透明な富士の湧水の水槽","大小の魚が共演して見える二重回遊水槽","森の公園内にある気持ちのよい立地"],
+      tags:["湧水","淡水魚"] }
+  ]},
+  { id:"nagano", name:"長野県", note:"長野県には現在、大型の水族館がありません。ここでは信州の魚にじっくり出会える公園内の展示施設を紹介します。", spots:[
+    { name:"国営アルプスあづみの公園「あづみの学校」理科教室", city:"安曇野市",
+      desc:"北アルプスのふもとの国営公園内、木造校舎風の建物に信州の川魚の水槽が並びます。安曇野の湧水に暮らすニジマスやイワナを、授業を受けるような気分で観察できます。",
+      price:"公園入園料 大人 450円（中学生以下無料）",
+      note:"水族展示は入園料のみで観覧可",
+      access:"JR穂高駅から車で約10分（堀金・穂高地区）",
+      points:["安曇野の湧水を再現した清流水槽","学校をモチーフにした懐かしい展示空間","公園の散策や季節の花とセットで"],
+      tags:["国営公園","清流の魚"],
+      url:"https://www.azumino-koen.jp/" }
+  ]},
+  { id:"gifu", name:"岐阜県", note:"", spots:[
+    { name:"世界淡水魚園水族館 アクア・トト ぎふ", city:"各務原市",
+      desc:"世界最大級の淡水魚専門水族館。長良川の源流から世界の大河アマゾン・メコン・コンゴへと旅する構成で、巨大魚ピラルクーやメコンオオナマズの迫力は海の水族館に負けません。",
+      price:"大人 1,780円 ／ 小・中学生 900円前後",
+      note:"",
+      access:"東海北陸道・川島ハイウェイオアシス直結（岐阜駅などからバスもあり）",
+      points:["長良川を源流から河口までたどる展示","世界の大河の巨大淡水魚たち","アシカショーやカピバラのふれあい"],
+      tags:["淡水魚世界最大級","ハイウェイオアシス"],
+      url:"https://aquatotto.com/" }
+  ]},
+  { id:"shizuoka", name:"静岡県", note:"", spots:[
+    { name:"沼津港深海水族館 シーラカンス・ミュージアム", city:"沼津市",
+      desc:"日本一深い駿河湾を望む港町にある、世界でも珍しい深海専門の水族館。冷凍保存されたシーラカンスの実物標本と、メンダコなど不思議な深海生物たちが主役です。",
+      price:"大人 1,800円 ／ 小・中学生 900円",
+      note:"",
+      access:"JR沼津駅からバス約15分「沼津港」下車",
+      points:["世界的にも貴重なシーラカンスの冷凍標本","駿河湾の深海生物の生体展示","沼津港の海鮮グルメとあわせて"],
+      tags:["深海","シーラカンス"],
+      url:"https://www.numazu-deepsea.com/" },
+    { name:"下田海中水族館", city:"下田市",
+      desc:"自然の入り江をそのまま生かした、イルカとの距離が日本屈指に近い水族館。入り江に浮かぶ船の展示室や、イルカと一緒に泳げる体験プログラムが豊富です。",
+      price:"大人 2,400円 ／ 小・中学生 1,200円",
+      note:"体験プログラムは別料金",
+      access:"伊豆急下田駅からバス約7分（徒歩約25分）",
+      points:["自然の入り江で暮らすイルカたち","海上ステージのダイナミックなショー","イルカと泳ぐ・ふれあう体験の充実度"],
+      tags:["イルカ体験","入り江"],
+      url:"https://shimoda-aquarium.com/" }
+  ]},
+  { id:"aichi", name:"愛知県", note:"", spots:[
+    { name:"名古屋港水族館", city:"名古屋市",
+      desc:"シャチやベルーガなど鯨類の展示で国内最大規模を誇る巨大水族館。世界最大級のメインプールで行われるイルカパフォーマンスと、ウミガメやペンギンの繁殖研究でも知られます。",
+      price:"大人 2,030円 ／ 小・中学生 1,010円",
+      note:"",
+      access:"地下鉄名港線・名古屋港駅から徒歩約5分",
+      points:["シャチの公開トレーニング","世界最大級プールのイルカショー","南極の海まで巡る本格的な展示構成"],
+      tags:["シャチ","国内最大級"],
+      url:"https://nagoyaaqua.jp/" },
+    { name:"蒲郡市竹島水族館", city:"蒲郡市",
+      desc:"小さいのに行列ができる人気館。飼育員の手書き解説「魚歴書」やユーモアあふれるPOP、深海生物にさわれるタッチプールなど、工夫と愛で全国区になった水族館です。",
+      price:"大人 500円 ／ 小・中学生 200円",
+      note:"",
+      access:"JR蒲郡駅から徒歩約15分",
+      points:["笑える手書きPOPと魚歴書","深海生物にさわれるタッチプール","増築リニューアルでさらに充実"],
+      tags:["手書きPOP","低料金"] }
+  ]}
+]},
+{ id:"kinki", region:"近畿地方", color:"#e08a2e", prefs:[
+  { id:"mie", name:"三重県", note:"", spots:[
+    { name:"鳥羽水族館", city:"鳥羽市",
+      desc:"飼育種類数約1,200種と日本一を誇る、伊勢志摩の巨大水族館。国内で唯一ジュゴンに会える館として知られ、順路のない自由通路で12のゾーンを気ままに巡れます。",
+      price:"大人 2,800円 ／ 小・中学生 1,600円",
+      note:"",
+      access:"JR・近鉄鳥羽駅から徒歩約10分",
+      points:["国内唯一のジュゴン「セレナ」","飼育種類数日本一の圧倒的コレクション","ラッコやスナドリネコなど珍しい生きもの"],
+      tags:["ジュゴン","種類数日本一"],
+      url:"https://aquarium.co.jp/" },
+    { name:"伊勢シーパラダイス", city:"伊勢市",
+      desc:"「距離感ゼロ」を掲げる、ふれあい特化の水族館。セイウチが館内を散歩し、ツメナシカワウソと握手ができるなど、海獣たちとの近さは全国でも別格です。",
+      price:"大人 2,100円 ／ 小・中学生 1,000円",
+      note:"",
+      access:"JR二見浦駅から徒歩約20分（夫婦岩すぐ）",
+      points:["セイウチのお散歩タイム","カワウソと握手できる人気体験","夫婦岩・おかげ横丁観光とセットで"],
+      tags:["ふれあい","セイウチ"],
+      url:"https://ise-seaparadise.com/" }
+  ]},
+  { id:"shiga", name:"滋賀県", note:"", spots:[
+    { name:"滋賀県立琵琶湖博物館", city:"草津市",
+      desc:"琵琶湖のほとりに立つ、淡水の展示では国内最大級の博物館。水族展示室ではビワコオオナマズなど琵琶湖の固有種が泳ぎ、湖と人の暮らしの歴史もあわせて学べます。",
+      price:"常設展 大人 800円 ／ 小・中学生 無料",
+      note:"高校・大学生 450円",
+      access:"JR草津駅からバス約25分",
+      points:["淡水専門として国内最大級の水族展示","ビワコオオナマズなど琵琶湖の固有種","トンネル水槽で湖の中を歩く体験"],
+      tags:["淡水","琵琶湖"],
+      url:"https://www.biwahaku.jp/" }
+  ]},
+  { id:"kyoto", name:"京都府", note:"", spots:[
+    { name:"京都水族館", city:"京都市",
+      desc:"京都駅近くの梅小路公園に立つ内陸型水族館。「水と共につながる、いのち。」をテーマに、鴨川にすむ特別天然記念物オオサンショウウオから京の海まで、京都の水の物語をたどります。",
+      price:"大人 2,400円 ／ 小・中学生 1,200円",
+      note:"",
+      access:"JR京都駅から徒歩約15分（梅小路公園内）",
+      points:["巨大なオオサンショウウオの展示","幻想的なクラゲ展示「クラゲワンダー」","イルカと京都の景色が重なるスタジアム"],
+      tags:["オオサンショウウオ","クラゲ"],
+      url:"https://www.kyoto-aquarium.com/" }
+  ]},
+  { id:"osaka", name:"大阪府", note:"", spots:[
+    { name:"海遊館", city:"大阪市",
+      desc:"世界最大級の水族館のひとつ。深さ9mの巨大水槽「太平洋」をジンベエザメが悠然と泳ぎ、環太平洋の海をぐるりと一周するように降りていく立体的な展示が圧巻です。",
+      price:"大人 2,400円〜2,700円 ／ 小学生 1,200円〜",
+      note:"日付によって変わる変動料金制",
+      access:"大阪メトロ・大阪港駅から徒歩約5分",
+      points:["ジンベエザメが泳ぐ巨大水槽「太平洋」","螺旋状に降りる立体的な順路","夜の海を演出するナイトタイム"],
+      tags:["ジンベエザメ","世界最大級"],
+      url:"https://www.kaiyukan.com/" },
+    { name:"NIFREL（ニフレル）", city:"吹田市",
+      desc:"海遊館がプロデュースする「感性にふれる」をテーマにした生きものミュージアム。水族館・動物園・美術館の境界をこえた空間で、ホワイトタイガーや漂うクラゲをアートのように鑑賞できます。",
+      price:"大人 2,200円 ／ 小・中学生 1,100円",
+      note:"",
+      access:"大阪モノレール・万博記念公園駅から徒歩約2分",
+      points:["美術館のように生きものを見せる展示","ホワイトタイガーやワオキツネザル","EXPOCITY内で買い物とあわせて"],
+      tags:["都市型","アート"],
+      url:"https://www.nifrel.jp/" }
+  ]},
+  { id:"hyogo", name:"兵庫県", note:"", spots:[
+    { name:"神戸須磨シーワールド", city:"神戸市",
+      desc:"2024年6月に開業した、西日本で唯一シャチに会える水族館。巨大なシャチスタジアムでのパフォーマンスや、シャチを眺めながら食事ができるレストランが話題です。",
+      price:"大人 2,900円〜3,700円 ／ 小学生 1,700円〜1,800円",
+      note:"日付によって変わる変動料金制",
+      access:"JR須磨海浜公園駅から徒歩約5分",
+      points:["西日本唯一のシャチパフォーマンス","水槽越しにシャチを望むレストラン","イルカとふれあえる体験プログラム"],
+      tags:["シャチ","2024年開業"],
+      url:"https://www.kobesuma-seaworld.jp/" },
+    { name:"城崎マリンワールド", city:"豊岡市",
+      desc:"城崎温泉の先、日本海を望む崖に立つ体験型水族館。「水族館以上、であること。」を掲げ、アジを釣ってその場で天ぷらにして食べられるなど、海を丸ごと味わえます。",
+      price:"大人 2,600円 ／ 小・中学生 1,300円",
+      note:"",
+      access:"JR城崎温泉駅からバス約10分",
+      points:["アジ釣り＆天ぷらの名物体験","日本海を背にしたイルカ・アシカショー","城崎温泉の外湯めぐりとセットで"],
+      tags:["体験型","温泉とセット"],
+      url:"https://marineworld.hiyoriyama.co.jp/" },
+    { name:"átoa（アトア）", city:"神戸市",
+      desc:"神戸・三宮の港近くに2021年開業した劇場型アクアリウム。舞台美術やデジタルアートと水槽を融合させ、宙に浮かぶ球体水槽など「映える」展示で新しい水族館像を提示します。",
+      price:"大人 2,400円 ／ 小学生 1,400円",
+      note:"日付により変動する場合あり",
+      access:"各線三宮駅から徒歩約18分",
+      points:["直径3mの球体水槽「AQUA TERRA」","和と幻想が混ざる劇場型の空間演出","神戸ポートミュージアム内の好立地"],
+      tags:["都市型","デジタルアート"],
+      url:"https://atoa-kobe.jp/" }
+  ]},
+  { id:"nara", name:"奈良県", note:"海のない奈良県ですが、金魚の名産地・大和郡山の文化を背景に、金魚に特化したミュージアムが楽しめます。", spots:[
+    { name:"NARA KINGYO MUSEUM（奈良金魚ミュージアム）", city:"奈良市",
+      desc:"金魚の養殖で名高い奈良ならではの、金魚に特化した体験型ミュージアム。プロジェクションマッピングや鏡張りの部屋など、フォトジェニックな空間で約40種の金魚を鑑賞できます。",
+      price:"大人 1,200円 ／ 小・中学生 800円",
+      note:"",
+      access:"近鉄新大宮駅から徒歩約10分（ミ・ナーラ4階）",
+      points:["万華鏡のような金魚の展示空間","写真映えするアート×金魚の演出","雨の日でも楽しめる屋内施設"],
+      tags:["金魚","フォトスポット"] }
+  ]},
+  { id:"wakayama", name:"和歌山県", note:"", spots:[
+    { name:"アドベンチャーワールド", city:"白浜町",
+      desc:"動物園・水族館・遊園地が一体となった南紀白浜の一大テーマパーク。ジャイアントパンダで有名ですが、イルカ・クジラのマリンライブやペンギン展示など水族館部分も本格派です。",
+      price:"1日入園 大人 4,800円 ／ 小・中学生 2,800円",
+      note:"",
+      access:"JR白浜駅からバス約10分",
+      points:["大型プールでのマリンライブ","パンダから海の動物まで一日では足りない規模","サファリと水族館を一度に楽しめる"],
+      tags:["テーマパーク","イルカショー"],
+      url:"https://www.aws-s.com/" },
+    { name:"京都大学白浜水族館", city:"白浜町",
+      desc:"京都大学の研究所に付属する、白浜周辺の海の生きものに特化した水族館。派手さはありませんが、研究者ならではの確かな解説と充実の無脊椎動物コレクションが光ります。",
+      price:"大人 600円 ／ 小・中学生 200円",
+      note:"",
+      access:"JR白浜駅からバス約15分",
+      points:["研究所付属ならではの専門的な展示","イソギンチャクなど無脊椎動物の宝庫","低料金でじっくり学べる"],
+      tags:["大学付属","研究"] }
+  ]}
+]},
+{ id:"chugoku", region:"中国地方", color:"#8e6bb5", prefs:[
+  { id:"tottori", name:"鳥取県", note:"", spots:[
+    { name:"とっとり賀露かにっこ館", city:"鳥取市",
+      desc:"カニの水揚げで名高い賀露港のそばに立つ、入館無料の「カニが主役」のミニ水族館。松葉ガニやタカアシガニなど約30種のカニを中心に、鳥取の海の生きものを紹介します。",
+      price:"入館無料",
+      note:"",
+      access:"JR鳥取駅からバス約25分（賀露港）",
+      points:["世界最大級のタカアシガニ","無料とは思えない展示の充実ぶり","隣接の海鮮市場で食事も楽しめる"],
+      tags:["カニ","入館無料"] }
+  ]},
+  { id:"shimane", name:"島根県", note:"", spots:[
+    { name:"島根県立しまね海洋館アクアス", city:"浜田市",
+      desc:"中四国最大級の水族館。幸せの「バブルリング」を披露するシロイルカのパフォーマンスが全国的に有名で、CMにも起用されました。サメやペンギンの展示も充実しています。",
+      price:"大人 1,550円 ／ 小・中・高校生 500円",
+      note:"",
+      access:"JR波子駅から徒歩約10分",
+      points:["シロイルカの幸せのバブルリング","中四国最大級のスケール","アクアスならではのサメの大水槽"],
+      tags:["シロイルカ","中四国最大級"],
+      url:"https://aquas.or.jp/" },
+    { name:"島根県立宍道湖自然館ゴビウス", city:"出雲市",
+      desc:"宍道湖と中海、川の生きものに特化した汽水域専門の体験学習型水族館。シジミやヨシノボリなど身近だけれど奥深い水辺の生態系を、約200種の展示でじっくり観察できます。",
+      price:"大人 500円 ／ 小・中・高校生 200円",
+      note:"",
+      access:"一畑電車・湖遊館新駅から徒歩約10分",
+      points:["全国でも珍しい汽水域専門の展示","宍道湖名物シジミの水槽","子どもの自由研究にぴったり"],
+      tags:["汽水域","学習型"] }
+  ]},
+  { id:"okayama", name:"岡山県", note:"", spots:[
+    { name:"渋川マリン水族館（玉野海洋博物館）", city:"玉野市",
+      desc:"渋川海岸のそばに立つ、昭和28年開館の歴史ある小さな水族館。瀬戸内海の魚を中心に約180種を展示し、海水浴とあわせて気軽に立ち寄れる存在として愛され続けています。",
+      price:"大人 500円 ／ 小・中学生 250円",
+      note:"",
+      access:"JR児島駅からバス、または瀬戸中央道・児島ICから車約15分",
+      points:["瀬戸内海の身近な魚たちを網羅","昭和レトロな雰囲気と低料金","目の前は渋川海水浴場"],
+      tags:["瀬戸内海","レトロ"] }
+  ]},
+  { id:"hiroshima", name:"広島県", note:"2025年には広島市中心部に新しい都市型水族館も誕生し、選択肢が広がりました。", spots:[
+    { name:"宮島水族館 みやじマリン", city:"廿日市市",
+      desc:"世界遺産・厳島神社のすぐ近くに立つ、和風建築の水族館。瀬戸内海のシンボルである小さなクジラの仲間スナメリや、名産カキのいかだを再現した水槽が見どころです。",
+      price:"大人 1,420円 ／ 小・中学生 710円",
+      note:"",
+      access:"宮島桟橋から徒歩約25分（厳島神社経由）",
+      points:["瀬戸内海の人気者スナメリ","カキいかだの海中を再現した水槽","厳島神社参拝とあわせて巡れる"],
+      tags:["スナメリ","世界遺産そば"],
+      url:"https://www.miyajima-aqua.jp/" },
+    { name:"広島もとまち水族館", city:"広島市",
+      desc:"2025年10月に広島市中心部の商業施設内に開業した都市型水族館。買い物のついでに立ち寄れる気軽さで、瀬戸内の海から世界の水辺までコンパクトに楽しめます。",
+      price:"料金は公式サイトでご確認ください",
+      note:"開業間もないため最新情報の確認を",
+      access:"広島電鉄・本通電停などから徒歩圏（市中心部）",
+      points:["2025年開業の新しい都市型水族館","市街地ど真ん中というアクセスの良さ","平和記念公園など観光とセットで"],
+      tags:["都市型","2025年開業"] }
+  ]},
+  { id:"yamaguchi", name:"山口県", note:"", spots:[
+    { name:"市立しものせき水族館 海響館", city:"下関市",
+      desc:"「フクの街」下関を象徴する、フグの仲間の展示世界一級の水族館。100種類を超えるフグ目魚類と、国内最大級のペンギン展示施設「ペンギン村」が二枚看板です。",
+      price:"大人 2,090円 ／ 小・中学生 940円",
+      note:"",
+      access:"JR下関駅からバス約7分（唐戸）",
+      points:["世界屈指のフグの仲間コレクション","亜南極の海を再現したペンギン村","シロナガスクジラの全身骨格標本"],
+      tags:["フグ","ペンギン"],
+      url:"https://www.kaikyokan.com/" }
+  ]}
+]},
+{ id:"shikoku", region:"四国地方", color:"#18a07a", prefs:[
+  { id:"tokushima", name:"徳島県", note:"", spots:[
+    { name:"日和佐うみがめ博物館カレッタ", city:"美波町",
+      desc:"アカウミガメの産卵地として国の天然記念物に指定された大浜海岸のそばに立つ、ウミガメ専門の博物館。子ガメから大ガメまで成長段階ごとに観察でき、保護研究の最前線にもふれられます。",
+      price:"大人 600円 ／ 小・中学生 300円",
+      note:"",
+      access:"JR日和佐駅から徒歩約20分",
+      points:["世界でも珍しいウミガメ専門館","産卵地・大浜海岸がすぐ目の前","年齢ごとのウミガメの成長を見比べる"],
+      tags:["ウミガメ","産卵地"] }
+  ]},
+  { id:"kagawa", name:"香川県", note:"屋島の「新屋島水族館」はリニューアルのため2027年春まで休館中で、その間は高松市中央卸売市場で臨時の「市場水族館」が営業しています。", spots:[
+    { name:"四国水族館", city:"宇多津町",
+      desc:"2020年開業、四国最大級の水族館。「四国水景」をテーマに、黒潮の荒々しさから瀬戸内の穏やかさまでを表現します。夕日と重なるイルカプールの美しさは特に有名です。",
+      price:"大人 2,400円 ／ 小・中学生 1,300円",
+      note:"",
+      access:"JR宇多津駅から徒歩約12分",
+      points:["瀬戸内の夕日を背にしたイルカプール","渦潮の下に潜り込む「渦潮の景」","四国の水辺をまるごと巡る展示構成"],
+      tags:["四国最大級","夕日"],
+      url:"https://shikoku-aquarium.jp/" },
+    { name:"市場水族館（新屋島水族館 臨時館）", city:"高松市",
+      desc:"リニューアル休館中の新屋島水族館に代わり、高松市中央卸売市場の旧青果棟で営業する全国でも珍しい「市場の中の水族館」。本館で人気だった生きものたちに会えます。",
+      price:"料金は公式サイトでご確認ください",
+      note:"2027年春の屋島本館再開までの臨時営業",
+      access:"JR昭和町駅から徒歩約15分",
+      points:["卸売市場×水族館という異色の組み合わせ","新屋島水族館の人気者たちが引っ越し中","2027年春には屋島で本館が再開予定"],
+      tags:["臨時館","市場"] }
+  ]},
+  { id:"ehime", name:"愛媛県", note:"", spots:[
+    { name:"虹の森公園 おさかな館", city:"松野町",
+      desc:"清流・四万十川の支流沿いに立つ淡水魚中心の水族館。四万十川のアカメや世界の珍魚に加え、ペンギンやコツメカワウソの散歩など、山あいの小さな館ながら見ごたえがあります。",
+      price:"大人 900円 ／ 小・中学生 400円",
+      note:"",
+      access:"JR松丸駅から徒歩約5分",
+      points:["幻の魚アカメなど四万十川の主たち","館内を歩くペンギンのお散歩","道の駅併設で立ち寄りやすい"],
+      tags:["淡水魚","四万十川"] }
+  ]},
+  { id:"kochi", name:"高知県", note:"", spots:[
+    { name:"桂浜水族館", city:"高知市",
+      desc:"坂本龍馬像で有名な桂浜のすぐそばに立つ昭和6年創業の老舗水族館。SNSで人気の公式キャラクター「おとどちゃん」と個性豊かな飼育員の発信で、全国にファンを持ちます。",
+      price:"大人 1,600円 ／ 小・中学生 600円",
+      note:"",
+      access:"JR高知駅からバス約40分（桂浜）",
+      points:["手書きPOPと飼育員の距離の近さ","土佐湾の魚やアシカ・ペンギン","龍馬像と桂浜散策とあわせて"],
+      tags:["老舗","おとどちゃん"],
+      url:"https://katurahama-aq.jp/" },
+    { name:"むろと廃校水族館", city:"室戸市",
+      desc:"廃校になった小学校をまるごと水族館に転用した話題の施設。25mプールではサメやウミガメが泳ぎ、跳び箱や手洗い場が水槽になっているなど、懐かしさと驚きが同居します。",
+      price:"大人 600円 ／ 小・中学生 300円",
+      note:"",
+      access:"高知東部交通バス・むろと廃校水族館前すぐ",
+      points:["25mプールを泳ぐサメとウミガメ","跳び箱水槽など学校ならではの展示","定置網にかかった地元の魚たち"],
+      tags:["廃校","ユニーク"] },
+    { name:"足摺海洋館 SATOUMI", city:"土佐清水市",
+      desc:"2020年に全面リニューアルした、竜串湾の海をテーマにする水族館。原生林の渓流から足摺の海中まで、土佐清水の自然をひと続きに体感できる洗練された展示が魅力です。",
+      price:"大人 1,200円 ／ 小・中学生 600円",
+      note:"",
+      access:"土佐くろしお鉄道・中村駅から車約50分（竜串）",
+      points:["竜串湾の海中を切り取った大水槽","渓流から海へつながる展示動線","周辺の見残し海岸など景勝地も必見"],
+      tags:["リニューアル","竜串"],
+      url:"https://kaiyoukan.jp/" }
+  ]}
+]},
+{ id:"kyushu", region:"九州・沖縄地方", color:"#d9595a", prefs:[
+  { id:"fukuoka", name:"福岡県", note:"", spots:[
+    { name:"マリンワールド海の中道", city:"福岡市",
+      desc:"博多湾を望む海の中道に立つ九州屈指の水族館。「九州の海」をテーマに、阿蘇の渓流から玄界灘、奄美のサンゴ礁までを再現。外洋を背景にしたイルカショーも爽快です。",
+      price:"大人 2,500円 ／ 小・中学生 1,200円",
+      note:"",
+      access:"JR海ノ中道駅から徒歩約5分",
+      points:["博多湾を借景にしたイルカプール","九州各地の海をたどる展示","夜の水族館イベントも人気"],
+      tags:["九州の海","イルカショー"],
+      url:"https://marine-world.jp/" }
+  ]},
+  { id:"saga", name:"佐賀県", note:"佐賀県には現在いわゆる水族館がありませんが、玄界灘の海中をそのままのぞける海中展望塔が水族館がわりに楽しめます。", spots:[
+    { name:"玄海海中展望塔", city:"唐津市",
+      desc:"波戸岬の沖合に立つ、海中に降りて天然の魚を観察できる展望塔。水深7mの海中展望室の窓からは、餌付けされていない玄界灘の魚たちのありのままの姿が見られます。",
+      price:"大人 570円 ／ 小・中学生 280円",
+      note:"",
+      access:"JR唐津駅からバス約30分（波戸岬）",
+      points:["水槽ではなく本物の海をのぞく体験","天候や季節で変わる海中の表情","波戸岬名物サザエのつぼ焼きとセットで"],
+      tags:["海中展望塔","天然の海"] }
+  ]},
+  { id:"nagasaki", name:"長崎県", note:"", spots:[
+    { name:"長崎ペンギン水族館", city:"長崎市",
+      desc:"飼育種類数世界一級、9種類約180羽のペンギンに特化した水族館。自然の海でペンギンが泳ぐ「ふれあいペンギンビーチ」は世界初の試みとして知られます。",
+      price:"大人 520円 ／ 小・中学生 310円",
+      note:"",
+      access:"JR長崎駅からバス約30分",
+      points:["世界最多級・9種類のペンギン","自然の海を泳ぐペンギンビーチ","深さ4mの水槽を飛ぶように泳ぐ姿"],
+      tags:["ペンギン","低料金"],
+      url:"https://penguin-aqua.jp/" },
+    { name:"九十九島水族館 海きらら", city:"佐世保市",
+      desc:"西海国立公園・九十九島の海を再現した水族館。屋外の九十九島湾大水槽に自然光が差し込む光景が美しく、真珠の玉出し体験やクラゲの研究展示でも知られます。",
+      price:"大人 1,470円 ／ 小・中学生 730円",
+      note:"",
+      access:"JR佐世保駅からバス約25分",
+      points:["自然光きらめく九十九島湾大水槽","真珠の玉出し体験","遊覧船で本物の九十九島へも"],
+      tags:["九十九島","真珠体験"] }
+  ]},
+  { id:"kumamoto", name:"熊本県", note:"", spots:[
+    { name:"わくわく海中水族館シードーナツ", city:"上天草市",
+      desc:"天草パールラインの海にドーナツ形に浮かぶ、全国でも珍しい海上浮体式の水族館。床下から海を感じながら、天草の海の生きものや世界の魚を間近に観察できます。",
+      price:"大人 1,300円 ／ 小・中学生 800円",
+      note:"イルカとのふれあいは別料金",
+      access:"JR三角駅から車・シャトル約15分",
+      points:["海にぷかぷか浮かぶ珍しい館","天草のイルカウォッチングの拠点","パールセンターでの天草グルメ"],
+      tags:["海上浮体式","天草"],
+      url:"https://amakusapearl.com/" }
+  ]},
+  { id:"oita", name:"大分県", note:"", spots:[
+    { name:"大分マリーンパレス水族館 うみたまご", city:"大分市",
+      desc:"別府湾を望む高崎山のふもとに立つ「動物となかよくなる水族館」。セイウチやイルカのパフォーマンス、アートと遊び場が融合した屋外エリア「あそびーち」が人気です。",
+      price:"大人 2,600円 ／ 小・中学生 1,300円",
+      note:"",
+      access:"JR大分駅からバス約15分",
+      points:["イルカを間近に感じるあそびーち","ユーモアたっぷりのセイウチショー","お隣の高崎山のサルとセットで"],
+      tags:["ふれあい","別府湾"],
+      url:"https://www.umitamago.jp/" }
+  ]},
+  { id:"miyazaki", name:"宮崎県", note:"", spots:[
+    { name:"志布志湾大黒イルカランド", city:"串間市",
+      desc:"志布志湾を望む海辺のふれあい施設。イルカショーやイルカとのタッチ体験を中心に、ペンギンやウミガメ、ヤギまで暮らすのびのびした雰囲気が魅力です。",
+      price:"大人 1,400円前後 ／ 小・中学生 900円前後",
+      note:"最新料金は公式サイトでご確認ください",
+      access:"国道448号沿い・志布志市街から車約20分",
+      points:["イルカと握手できる距離の近さ","志布志湾を一望するロケーション","ウミガメの泳ぐプールにも注目"],
+      tags:["イルカ","ふれあい"] }
+  ]},
+  { id:"kagoshima", name:"鹿児島県", note:"", spots:[
+    { name:"いおワールドかごしま水族館", city:"鹿児島市",
+      desc:"桜島を望むウォーターフロントに立つ九州南部最大級の水族館。黒潮大水槽をジンベエザメ「ユウユウ」が泳ぎ、錦江湾や奄美のサンゴ礁など鹿児島の海を一望できます。",
+      price:"大人 1,500円 ／ 小・中学生 750円",
+      note:"",
+      access:"JR鹿児島中央駅からバス約15分",
+      points:["黒潮大水槽のジンベエザメ","水路で見られる野生のイルカ","桜島フェリー乗り場のすぐそば"],
+      tags:["ジンベエザメ","桜島"],
+      url:"https://ioworld.jp/" }
+  ]},
+  { id:"okinawa", name:"沖縄県", note:"", spots:[
+    { name:"沖縄美ら海水族館", city:"本部町",
+      desc:"日本を代表する水族館のひとつ。巨大水槽「黒潮の海」では複数のジンベエザメとナンヨウマンタが乱舞し、サンゴの大規模飼育や深海展示まで、沖縄の海を丸ごと体感できます。",
+      price:"大人 2,180円 ／ 小学生 710円",
+      note:"",
+      access:"那覇空港から車・バスで約2時間（海洋博公園内）",
+      points:["ジンベエザメが舞う「黒潮の海」","世界初級のサンゴ大規模飼育","無料エリアのイルカショーも充実"],
+      tags:["ジンベエザメ","日本代表級"],
+      url:"https://churaumi.okinawa/" },
+    { name:"DMMかりゆし水族館", city:"豊見城市",
+      desc:"那覇空港近くの商業施設に2020年開業した、映像表現と空間演出を駆使する新感覚の都市型水族館。ガラス床から海をのぞく仕掛けなど、最新技術で沖縄の自然を表現します。",
+      price:"大人 2,400円 ／ 小学生 1,500円",
+      note:"日付により変動する場合あり",
+      access:"那覇空港から車で約20分（イーアス沖縄豊崎）",
+      points:["ガラス床の海中散歩体験","映像と生体を組み合わせた演出","空港近くで旅の最初・最後に寄れる"],
+      tags:["都市型","最新演出"],
+      url:"https://kariyushi-aquarium.com/" }
+  ]}
+]}
+];
+
+/* =========================================================
+   以下、表示ロジック
+   ========================================================= */
+const esc = s => String(s == null ? "" : s).replace(/[&<>"']/g, c => (
+  {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]
+));
+
+const app = document.getElementById("app");
+const crumbsInner = document.getElementById("crumbsInner");
+const searchInput = document.getElementById("searchInput");
+const searchBtn = document.getElementById("searchBtn");
+
+/* 全施設のフラット索引（横断検索用） */
+const ALL = [];
+DATA.forEach(r => r.prefs.forEach(p => p.spots.forEach(s => ALL.push({ region: r, pref: p, spot: s }))));
+document.getElementById("statSpots").textContent = ALL.length;
+
+const byRegion = id => DATA.find(r => r.id === id) || null;
+function findPref(id){
+  for (const r of DATA){
+    const p = r.prefs.find(x => x.id === id);
+    if (p) return { region: r, pref: p };
+  }
+  return null;
+}
+
+/* ---------- 部品 ---------- */
+function linkHTML(s){
+  if (s.url){
+    return '<a class="aq-link" href="' + esc(s.url) + '" target="_blank" rel="noopener noreferrer">公式サイトへ →</a>';
+  }
+  const q = encodeURIComponent(s.name + " 公式サイト");
+  return '<a class="aq-link" href="https://www.google.com/search?q=' + q + '" target="_blank" rel="noopener noreferrer">公式サイトを検索 →</a>';
+}
+
+function cardHTML(item, withPrefBadge){
+  const s = item.spot;
+  const badge = withPrefBadge
+    ? '<span class="result-pref" style="background:' + esc(item.region.color) + '">' + esc(item.pref.name) + '</span>'
+    : "";
+  const tags = (s.tags || []).map(t => '<li class="tag">' + esc(t) + '</li>').join("");
+  const alert = s.alert ? '<p class="aq-alert">※ ' + esc(s.alert) + '</p>' : "";
+  const points = (s.points || []).map(p => '<li>' + esc(p) + '</li>').join("");
+  const note = s.note ? '<p class="stub-note">※ ' + esc(s.note) + '</p>' : "";
+  return (
+    '<li class="aq-card">' +
+      '<div class="aq-main">' +
+        '<div class="aq-head"><h3 class="aq-name">' + esc(s.name) + '</h3>' +
+        '<span class="aq-city">' + esc(s.city) + '</span>' + badge + '</div>' +
+        (tags ? '<ul class="aq-tags">' + tags + '</ul>' : "") +
+        '<p class="aq-desc">' + esc(s.desc) + '</p>' +
+        alert +
+        '<div class="aq-rows">' +
+          '<div class="aq-row"><span class="aq-k">アクセス</span><div>' + esc(s.access) + '</div></div>' +
+          '<div class="aq-row"><span class="aq-k">みどころ</span><ul class="points">' + points + '</ul></div>' +
+        '</div>' +
+        linkHTML(s) +
+      '</div>' +
+      '<aside class="aq-stub">' +
+        '<p class="stub-label">入館料のめやす</p>' +
+        '<p class="stub-price">' + esc(s.price) + '</p>' +
+        note +
+      '</aside>' +
+    '</li>'
+  );
+}
+
+function backHTML(hash, label){
+  return '<div class="back-row"><button type="button" class="btn-back" data-hash="' + esc(hash) + '">← ' + esc(label) + '</button></div>';
+}
+
+/* ---------- パンくず ---------- */
+function setCrumbs(parts){
+  crumbsInner.innerHTML = parts.map((p, i) => {
+    const sep = i ? '<span class="crumb-sep">／</span>' : "";
+    if (p.hash != null){
+      return sep + '<button type="button" class="crumb-link" data-hash="' + esc(p.hash) + '">' + esc(p.label) + '</button>';
+    }
+    return sep + '<span class="crumb-now">' + esc(p.label) + '</span>';
+  }).join("");
+}
+
+/* ---------- 各ビュー ---------- */
+function renderRegions(){
+  setCrumbs([{ label: "トップ", hash: null }]);
+  const cards = DATA.map(r => {
+    const spotCount = r.prefs.reduce((n, p) => n + p.spots.length, 0);
+    return (
+      '<li><button type="button" class="region-card" style="--rc:' + esc(r.color) + '" data-hash="r/' + esc(r.id) + '">' +
+        '<div class="region-name">' + esc(r.region) + '</div>' +
+        '<div class="region-meta"><span><b>' + r.prefs.length + '</b> 都道府県</span><span><b>' + spotCount + '</b> 施設</span></div>' +
+      '</button></li>'
+    );
+  }).join("");
+  app.innerHTML =
+    '<section class="view">' +
+      '<h2 class="section-label">地方からえらぶ</h2>' +
+      '<p class="section-sub">まずはお住まいの地方、旅先の地方を選んでください。</p>' +
+      '<ul class="grid-regions">' + cards + '</ul>' +
+    '</section>';
+}
+
+function renderPrefs(region){
+  setCrumbs([{ label: "トップ", hash: "" }, { label: region.region, hash: null }]);
+  const btns = region.prefs.map(p =>
+    '<li><button type="button" class="pref-btn" style="--rc:' + esc(region.color) + '" data-hash="p/' + esc(p.id) + '">' +
+      '<span>' + esc(p.name) + '</span><span class="pref-count">' + p.spots.length + '館</span>' +
+    '</button></li>'
+  ).join("");
+  app.innerHTML =
+    '<section class="view">' +
+      backHTML("", "地方の一覧へもどる") +
+      '<h2 class="section-label">' + esc(region.region) + '</h2>' +
+      '<p class="section-sub">都道府県を選ぶと、水族館の紹介が表示されます。</p>' +
+      '<ul class="grid-prefs">' + btns + '</ul>' +
+    '</section>';
+}
+
+function renderPref(region, pref){
+  setCrumbs([
+    { label: "トップ", hash: "" },
+    { label: region.region, hash: "r/" + region.id },
+    { label: pref.name, hash: null }
+  ]);
+  const note = pref.note ? '<p class="pref-note">' + esc(pref.note) + '</p>' : "";
+  const cards = pref.spots.map(s => cardHTML({ region: region, pref: pref, spot: s }, false)).join("");
+  app.innerHTML =
+    '<section class="view">' +
+      backHTML("r/" + region.id, region.region + "の県一覧へもどる") +
+      '<h2 class="section-label">' + esc(pref.name) + 'の水族館</h2>' +
+      note +
+      '<ul class="aq-list">' + cards + '</ul>' +
+    '</section>';
+}
+
+function renderSearch(q){
+  setCrumbs([{ label: "トップ", hash: "" }, { label: '検索結果「' + q + '」', hash: null }]);
+  const key = q.toLowerCase();
+  const hits = ALL.filter(it => {
+    const s = it.spot;
+    const hay = [s.name, s.city, s.desc, s.price, s.access, it.pref.name, it.region.region]
+      .concat(s.tags || [], s.points || [])
+      .join(" ").toLowerCase();
+    return hay.indexOf(key) !== -1;
+  });
+  const body = hits.length
+    ? '<ul class="aq-list">' + hits.map(it => cardHTML(it, true)).join("") + '</ul>'
+    : '<div class="empty">「' + esc(q) + '」に合う水族館が見つかりませんでした。<br>施設名・県名・「ジンベエザメ」「ふれあい」などのキーワードでお試しください。</div>';
+  app.innerHTML =
+    '<section class="view">' +
+      backHTML("", "地方の一覧へもどる") +
+      '<h2 class="section-label">検索結果</h2>' +
+      '<p class="section-sub">「' + esc(q) + '」に ' + hits.length + ' 件の施設が見つかりました。</p>' +
+      body +
+    '</section>';
+}
+
+/* ---------- ルーティング ---------- */
+let booted = false;
+function route(){
+  const h = decodeURIComponent(location.hash.replace(/^#/, ""));
+  if (h.indexOf("p/") === 0){
+    const hit = findPref(h.slice(2));
+    if (hit){ renderPref(hit.region, hit.pref); afterRender(); return; }
+  } else if (h.indexOf("r/") === 0){
+    const r = byRegion(h.slice(2));
+    if (r){ renderPrefs(r); afterRender(); return; }
+  }
+  renderRegions();
+  afterRender();
+}
+function afterRender(){
+  if (booted) window.scrollTo({ top: 0, behavior: "smooth" });
+  booted = true;
+}
+function go(hash){
+  if (("#" + hash === location.hash) || (hash === "" && !location.hash)){ route(); return; }
+  location.hash = hash;
+}
+
+/* ---------- イベント ---------- */
+document.addEventListener("click", e => {
+  const t = e.target.closest("[data-hash]");
+  if (!t) return;
+  searchInput.value = "";
+  go(t.getAttribute("data-hash"));
+});
+function doSearch(){
+  const q = searchInput.value.trim();
+  if (!q){ route(); return; }
+  renderSearch(q);
+  afterRender();
+}
+searchBtn.addEventListener("click", doSearch);
+searchInput.addEventListener("keydown", e => { if (e.key === "Enter") doSearch(); });
+searchInput.addEventListener("input", () => { if (!searchInput.value.trim()) route(); });
+window.addEventListener("hashchange", route);
+
+route();
+</script>
+</body>
+</html>
